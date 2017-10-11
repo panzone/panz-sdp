@@ -1,0 +1,25 @@
+apply plugin: 'java'
+
+repositories {
+  jcenter()
+  mavenCentral()}
+
+dependencies {
+compile "javax.ws.rs:javax.ws.rs-api:2.0.1"
+compile "javax.validation:validation-api:1.1.0.Final"
+compile 'javax.xml.bind:jaxb-api:2.2'
+  compile 'com.google.code.gson:gson:2.6.2'
+  compile "org.glassfish.jersey.core:jersey-server:2.16"
+compile "org.glassfish.jersey.ext:jersey-proxy-client:2.16"
+compile "org.glassfish.jersey.media:jersey-media-json-jackson:2.16"
+}
+
+jar{
+  manifest {
+      attributes ('Main-Class': 'MainClient')
+  }
+
+  from {
+   configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+ }
+}
